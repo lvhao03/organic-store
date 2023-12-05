@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\productModel;
 use App\Models\Product;
 use App\Models\Category;
+use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 
 class productController extends Controller
@@ -16,7 +17,8 @@ class productController extends Controller
     function shop(){
         return view('frontend.shop', [
             'productList' =>  Product::all(),
-            'categoryList' => Category::all()
+            'categoryList' => Category::all(),
+            'saleProductList' => Product::whereNotNull('sale')->with('category')->get()
         ]);
     }
 

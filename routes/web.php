@@ -4,6 +4,7 @@ use App\Http\Controllers\reviewController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\productController;
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,3 +62,15 @@ Route::prefix('admin/category')->group(function(){
     Route::get('delete/{id}', [categoryController::class, 'delete']);
 });
 
+Route::prefix('admin/user')->group(function(){
+
+    Route::get('list', [userController::class, 'index']);
+    
+    Route::get('add', [userController::class, 'add']);
+    Route::post('add', [userController::class, 'add_']);
+    
+    Route::get('edit/{id}', [userController::class, 'edit']);
+    Route::post('edit', [userController::class, 'edit_']);
+    
+    Route::get('delete/{id}', [userController::class, 'delete']);
+});

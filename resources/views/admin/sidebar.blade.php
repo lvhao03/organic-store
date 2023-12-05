@@ -23,6 +23,12 @@
             </a>
         </li>
         <li>
+            <a href="/admin/user/list">
+                <i class='bx bxs-shopping-bag-alt' ></i>
+                <span class="text">Người dùng</span>
+            </a>
+        </li>
+        <li>
             <a href="/admin/review/list">
                 <i class='bx bxs-shopping-bag-alt' ></i>
                 <span class="text">Bình luận</span>
