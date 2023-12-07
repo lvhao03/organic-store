@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Mail\welcomeMail;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class adminController extends Controller
@@ -27,6 +29,10 @@ class adminController extends Controller
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
         ]);
+        $welcomeMail = new WelcomeMail();
+
+        Mail::to($request['email'])->send($welcomeMail);
+
         return redirect('/login');
     }
     function logout(){ 

@@ -24,7 +24,7 @@
         </li>
         <li>
             <a href="/admin/user/list">
-                <i class='bx bxs-shopping-bag-alt' ></i>
+                <i class='bx bxs-user-circle'></i>
                 <span class="text">Người dùng</span>
             </a>
         </li>
@@ -63,7 +63,7 @@
         <li>
             <a href="#" class="logout">
                 <i class='bx bxs-log-out-circle' ></i>
-                <span class="text">Logout</span>
+                <span class="text"><a href="/logout">Đăng xuất</a></span>
             </a>
         </li>
     </ul>

@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-    </section>
+</section>
     <!-- Hero Section End -->
 
     <!-- Categories Section Begin -->
