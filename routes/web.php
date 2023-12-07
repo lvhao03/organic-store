@@ -5,6 +5,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\orderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,10 @@ Route::get('/register', [adminController::class, 'register']);
 Route::post('/register', [adminController::class, 'register_']);
 
 Route::get('/logout', [adminController::class, 'logout']);
+
+Route::get('/checkout', [orderController::class, 'index']);
+Route::post('/checkout', [orderController::class, 'index_']);
+
 Route::get('/admin', function () {
     return view('admin.main');
 });

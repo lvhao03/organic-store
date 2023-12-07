@@ -144,7 +144,7 @@
                             <li>Phí ship <span>0đ</span></li>
                             <li>Tổng tiền <span>{{number_format($totalMoney , 0 , ',')}} đ</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">Thanh toán</a>
+                        <a href="/checkout" class="primary-btn">Thanh toán</a>
                     </div>
                 </div>
             </div>
