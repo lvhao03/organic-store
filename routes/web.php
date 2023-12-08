@@ -29,6 +29,7 @@ Route::get('/deleteAllCart', [productController::class, 'deleteAllCart']);
 
 Route::get('/login', [adminController::class, 'login']);
 Route::post('/login', [adminController::class, 'login_']);
+
 Route::get('/register', [adminController::class, 'register']);
 Route::post('/register', [adminController::class, 'register_']);
 
@@ -39,9 +40,9 @@ Route::post('/checkout', [orderController::class, 'index_']);
 
 Route::get('/admin', function () {
     return view('admin.main');
-});
+})->middleware('checkAdmin');
 
-Route::prefix('admin/product')->group(function(){
+Route::prefix('admin/product')->middleware('checkAdmin')->group(function(){
 
     Route::get('list', [productController::class, 'adminIndex']);
     
@@ -54,7 +55,7 @@ Route::prefix('admin/product')->group(function(){
     Route::get('delete/{id}', [productController::class, 'delete']);
 });
 
-Route::prefix('admin/category')->group(function(){
+Route::prefix('admin/category')->middleware('checkAdmin')->group(function(){
 
     Route::get('list', [categoryController::class, 'index']);
     
@@ -67,7 +68,7 @@ Route::prefix('admin/category')->group(function(){
     Route::get('delete/{id}', [categoryController::class, 'delete']);
 });
 
-Route::prefix('admin/user')->group(function(){
+Route::prefix('admin/user')->middleware('checkAdmin')->group(function(){
 
     Route::get('list', [userController::class, 'index']);
     
@@ -78,4 +79,17 @@ Route::prefix('admin/user')->group(function(){
     Route::post('edit', [userController::class, 'edit_']);
     
     Route::get('delete/{id}', [userController::class, 'delete']);
+});
+
+Route::prefix('admin/order')->middleware('checkAdmin')->group(function(){
+
+    Route::get('list', [orderController::class, 'adminIndex']);
+    
+    Route::get('add', [orderController::class, 'add']);
+    Route::post('add', [orderController::class, 'add_']);
+    
+    Route::get('edit/{id}', [orderController::class, 'edit']);
+    Route::post('edit', [orderController::class, 'edit_']);
+    
+    Route::get('delete/{id}', [orderController::class, 'delete']);
 });

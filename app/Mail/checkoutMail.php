@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class welcomeMail extends Mailable
+class checkoutMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,7 +31,7 @@ class welcomeMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Cảm ơn vì đã đăng ký',
+            subject: 'Mail thanh toán',
         );
     }
 
@@ -43,7 +43,7 @@ class welcomeMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mails.welcome-mail',
+            view: 'mails.checkout-mail',
         );
     }
 

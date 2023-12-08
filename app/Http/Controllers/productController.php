@@ -22,31 +22,33 @@ class productController extends Controller
         ]);
     }
 
+    function orderBy($orderBy){
+        $productList = Product::orderBy('price', $orderBy)->get();
+        return response()->json($productList);
+    }
+
 
     function detail($id){
         return view('frontend.shop-details', ['product' => Product::find($id)]);
     }
 
-    function addToCart(Request $request, $id = 0, $quantity=1){
+    function addToCart(Request $request, $id = 0, $quantity = 1){
         if ($request->session()->exists('cart') == false) {           
-            $request->session()->push('cart', ['id'=> $id,  'quantity'=> $quantity]);          
-        }
+            $request->session()->push('cart', ['id'=> $id,  'quantity'=> $quantity]);
+            return view('frontend.shoping-cart');
+        } 
         $cart =  $request->session()->get('cart'); 
         $index = array_search($id, array_column($cart, 'id'));
-        if ($index != ''){ //id_sp có trong giỏ  thì tăhg số lượng
+        if ($index != ''){
             $cart[$index]['quantity'] += $quantity;
             $request->session()->put('cart', $cart);
-        } else { //sp chưa có trong arrary cart thì thêm vào 
+        } else { 
             $cart[]= ['id'=> $id, 'quantity'=> $quantity];
             $request->session()->put('cart', $cart);
         }    
         return view('frontend.shoping-cart');
     }
     
-    function xoagiohang( Request $request){
-        $request->session()->forget('cart');
-        return redirect('/');
-    }
     function cart(){
         return view('frontend.shoping-cart');
     }

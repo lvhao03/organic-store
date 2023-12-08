@@ -209,9 +209,9 @@
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
                                     <span>Lọc theo</span>
-                                    <select>
-                                        <option value="0">Default</option>
-                                        <option value="0">Default</option>
+                                    <select id="order" onchange="getProduct()">
+                                        <option value="asc">từ thấp đến cao</option>
+                                        <option value="desc">từ cao đến thấp</option>
                                     </select>
                                 </div>
                             </div>
@@ -228,7 +228,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row product-row">
                         @foreach($productList as $product)
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
@@ -258,4 +258,39 @@
         </div>
     </section>
     <!-- Product Section End -->
+
+    <script>
+        function getProduct(){
+            let a = document.getElementById('order').value;
+            let b = $('.product-row');
+            $.ajax({
+                url: '/api/product/' + a,
+                dataType: 'JSON',
+                type: 'GET',
+                success: function(result){
+                    let html = '';
+                    result.forEach(product => {
+                        let image_path = "http://127.0.0.1:8000/site/img/product/" + product['image_url'];
+                        html += `<div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="${image_path}" style="background-image: url(${image_path});">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="/product/{{$product->id}}">${product['name']}</a></h6>
+                                    <h5>${product['price']} đ</h5>
+                                </div>
+                            </div>
+                        </div>`
+                    });
+                    b.html(html);
+                    html = '';
+                }
+            })
+        }
+    </script>
 @endsection

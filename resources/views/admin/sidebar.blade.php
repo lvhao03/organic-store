@@ -29,6 +29,12 @@
             </a>
         </li>
         <li>
+            <a href="/admin/order/list">
+                <i class='bx bxs-user-circle'></i>
+                <span class="text">Đơn hàng</span>
+            </a>
+        </li>
+        <li>
             <a href="/admin/review/list">
                 <i class='bx bxs-shopping-bag-alt' ></i>
                 <span class="text">Bình luận</span>
