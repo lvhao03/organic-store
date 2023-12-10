@@ -17,7 +17,7 @@
                             <h4>Danh mục</h4>
                             @foreach($categoryList as $category)
                             <ul>
-                                <li><a href="#">{{$category->name}}</a></li>
+                                <li  onclick="changeCatergory({{$category->id}})" style="cursor:pointer; margin: bottom 10px;">{{$category->name}}</></li>
                             </ul>
                             @endforeach
                         </div>
@@ -172,7 +172,7 @@
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-7">
-                    <div class="product__discount">
+                    <!-- <div class="product__discount">
                         <div class="section-title product__discount__title">
                             <h2>Giảm giá</h2>
                         </div>
@@ -203,7 +203,8 @@
                                 @endforeach
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+                    <h2>Danh sách sản phẩm</h2>
                     <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
@@ -217,7 +218,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>16</span> Products found</h6>
+                                    <h6 class="product-count"><span>Sản phẩm tìm được </span>{{$productList->count()}}</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -260,6 +261,39 @@
     <!-- Product Section End -->
 
     <script>
+
+        function changeCatergory(categoryID){
+            let b = $('.product-row');
+            $.ajax({
+                url: '/api/product/filter/' + categoryID,
+                dataType: 'JSON',
+                type: 'GET',
+                success: function(result){
+                    let html = '';
+                    result.forEach(product => {
+                        let image_path = "http://127.0.0.1:8000/site/img/product/" + product['image_url'];
+                        html += `<div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="${image_path}" style="background-image: url(${image_path});">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="/product/{{$product->id}}">${product['name']}</a></h6>
+                                    <h5>${product['price']} đ</h5>
+                                </div>
+                            </div>
+                        </div>`
+                    });
+                    b.html(html);
+                    c.html(d);
+                }
+            })
+        }
+
         function getProduct(){
             let a = document.getElementById('order').value;
             let b = $('.product-row');
@@ -288,7 +322,7 @@
                         </div>`
                     });
                     b.html(html);
-                    html = '';
+                    c.html(d);
                 }
             })
         }

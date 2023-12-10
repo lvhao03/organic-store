@@ -19,3 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/product/{orderBy}', [productController::class, 'orderBy']);
+Route::get('/product/search/{productName}', [productController::class, 'search']);
+Route::get('/product/filter/{catergoryID}', [productController::class, 'filterByCatergory']);

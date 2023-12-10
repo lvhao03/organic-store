@@ -41,9 +41,9 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="/admin/chart">
                 <i class='bx bxs-doughnut-chart' ></i>
-                <span class="text">Analytics</span>
+                <span class="text">Thống kê</span>
             </a>
         </li>
         <li>

@@ -207,11 +207,11 @@
                         <div class="hero__search__form">
                             <form action="#">
                                 <div class="hero__search__categories">
-                                    All Categories
+                                    Tất cả danh mục
                                     <span class="arrow_carrot-down"></span>
                                 </div>
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                <input id="search" type="text" placeholder="Tìm sản phẩm bạn muốn tìm">
+                                <button type="submit" class="site-btn">Tìm kiếm</button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -296,7 +296,6 @@
         </div>
     </footer>
     <!-- Footer Section End -->
-
     <!-- Js Plugins -->
     <script src="{{asset('/site')}}/js/jquery-3.3.1.min.js"></script>
     <script src="{{asset('/site')}}/js/bootstrap.min.js"></script>
@@ -307,6 +306,46 @@
     <script src="{{asset('/site')}}/js/owl.carousel.min.js"></script>
     <script src="{{asset('/site')}}/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script>
+        $("#search").keydown(function(){
+            let keyWord = $("#search").val();
+            let b = $('.product-row');
+            let c = $('.product-count');
+            let d = '<span>Sản phẩm tìm được</span>';
+            $.ajax({
+                url: '/api/product/search/' + keyWord,
+                dataType: 'JSON',
+                type: 'GET',
+                success: function(result){
+                    let html = '';
+                    d += result.length;
+                    console.log(d);
+                    result.forEach(product => {
+                        let image_path = "http://127.0.0.1:8000/site/img/product/" + product['image_url'];
+                        html += `<div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="${image_path}" style="background-image: url(${image_path});">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="/product/{{$product->id}}">${product['name']}</a></h6>
+                                    <h5>${product['price']} đ</h5>
+                                </div>
+                            </div>
+                        </div>`
+                    });
+                    b.html(html);
+                    c.html(d);
+                    html = '';
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>

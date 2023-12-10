@@ -20,7 +20,7 @@ class adminController extends Controller
             if($user->role == 1) return redirect('/admin');
             return redirect('/');
         }
-        return redirect('/login')->with('thongbao', 'Email hoặc mật khẩu sai');
+        return redirect('/login');
     }
 
     function register_(Request $request){

@@ -24,9 +24,18 @@ class productController extends Controller
 
     function orderBy($orderBy){
         $productList = Product::orderBy('price', $orderBy)->get();
-        return response()->json($productList);
+        return response()->json($productList, 200);
     }
 
+    function search($productName){
+        $productList = Product::where('name', 'like', '%' . $productName . '%')->get();
+        return response()->json($productList, 200);
+    }
+
+    function filterByCatergory($categoryID) {
+        $productList = Product::where('category_id' , $categoryID)->get();
+        return response()->json($productList, 200);
+    }
 
     function detail($id){
         return view('frontend.shop-details', ['product' => Product::find($id)]);

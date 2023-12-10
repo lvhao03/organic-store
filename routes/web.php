@@ -4,6 +4,7 @@ use App\Http\Controllers\reviewController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\productController;
+use App\Http\Controllers\chartController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\orderController;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [productController::class, 'index']);
 Route::get('/shop', [productController::class, 'shop']);
-Route::get('/product/{id}', [productController::class, 'detail']);
+Route::get('/product/{productName}', [productController::class, 'detail']);
 Route::get('/cart', [productController::class, 'cart']);
 Route::get('/addToCart/{id}/{quantity}', [productController::class, 'addToCart']);
 Route::get('/deleteCart/{id}/', [productController::class, 'deleteCart']);
@@ -93,3 +94,5 @@ Route::prefix('admin/order')->middleware('checkAdmin')->group(function(){
     
     Route::get('delete/{id}', [orderController::class, 'delete']);
 });
+
+Route::get('/admin/chart', [chartController::class, 'index'])->middleware('checkAdmin');
