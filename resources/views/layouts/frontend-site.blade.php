@@ -107,7 +107,7 @@
                                         Đăng nhập
                                     @endif
                                 </a>
-                                <!-- <a href="/logout">Đăng xuất</a> -->
+                                <a href="/logout">Đăng xuất</a>
                             </div>
                         </div>
                     </div>

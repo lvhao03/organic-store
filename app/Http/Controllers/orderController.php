@@ -50,7 +50,11 @@ class orderController extends Controller
         ]);
     }
 
-    function edit_(){
-
+    function edit_(Request $request){
+        $order = Order::find($request['id']);
+        $order->update([
+            'status' => $request['status']
+        ]);
+        return view('admin.order.list', ['orderList' => Order::all()] );
     }
 }

@@ -39,9 +39,7 @@ Route::get('/logout', [adminController::class, 'logout']);
 Route::get('/checkout', [orderController::class, 'index']);
 Route::post('/checkout', [orderController::class, 'index_']);
 
-Route::get('/admin', function () {
-    return view('admin.main');
-})->middleware('checkAdmin');
+Route::get('/admin', [adminController::class, 'index'])->middleware('checkAdmin');
 
 Route::prefix('admin/product')->middleware('checkAdmin')->group(function(){
 

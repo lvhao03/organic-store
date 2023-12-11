@@ -11,12 +11,15 @@
 <p>Số điện thoại: {{$order->address}}</p>
 <p>Điện thoại: {{$order->phone}}</p>
 <p>Trạng thái đơn hàng:</p>
-<form action="">
+<form action="/admin/order/edit" method="post">
+    @csrf
+    <input hidden type="text" name="id" value="{{$order->id}}">
     <select name="status" id="">
-        <option value="0">Đang xử lý</option>
-        <option value="1">Hoàn tất</option>
+        <option value="0">Chờ xác nhận</option>
+        <option value="1">Đang xử lý</option>
+        <option value="2">Hoàn tất</option>
     </select>
-    <a href="/admin/order/edit"><button class="btn btn-primary">Chỉnh sửa</button></a>
+   <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
 </form>
 <table class="table table-hover">
     <thead>

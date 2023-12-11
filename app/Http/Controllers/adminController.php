@@ -3,12 +3,21 @@
 namespace App\Http\Controllers;
 use App\Mail\welcomeMail;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class adminController extends Controller
 {
-    function index(){ return view("admin/index"); }
+    function index(){
+        
+        return view("admin.main", [
+            'userCount' => User::count(), 
+            'orderCount' => Order::count(),
+            'totalMoney' => Order::sum('total_money'),
+            'orderList' => Order::orderBy('created_at', 'desc')->get()
+        ]); 
+    }
     function login(){ return view("frontend.login"); }
     function register(){ return view("frontend.register"); }
 
