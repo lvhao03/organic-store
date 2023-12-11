@@ -16,7 +16,7 @@ class productController extends Controller
 
     function shop(){
         return view('frontend.shop', [
-            'productList' =>  Product::all(),
+            'productList' =>  Product::paginate(2),
             'categoryList' => Category::all(),
             'saleProductList' => Product::whereNotNull('sale')->with('category')->get()
         ]);
@@ -38,7 +38,9 @@ class productController extends Controller
     }
 
     function detail($id){
-        return view('frontend.shop-details', ['product' => Product::find($id)]);
+        $product = Product::find($id);
+        $relatedProducts = Product::where('category_id' , $product->category_id )->get();
+        return view('frontend.shop-details', ['product' => $product, 'relatedProducts' => $relatedProducts ]);
     }
 
     function addToCart(Request $request, $id = 0, $quantity = 1){
